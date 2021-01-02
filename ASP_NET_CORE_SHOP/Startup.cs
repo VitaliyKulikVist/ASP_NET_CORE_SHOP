@@ -22,31 +22,13 @@ namespace ASP_NET_CORE_SHOP
         // Этот метод вызывается средой выполнения. Используйте этот метод для настройки конвейера HTTP-запросов.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())//Якщо ми зараз в режимі IsDevelopment                      є два режима: Розробки і публікації (Девелоп\Продакшен) Міняється в пкм на проекті і свойства
-            {
-                app.UseDeveloperExceptionPage();//То показуємо пимилкі навіть в браузері                    інакше якщо в іншому режимі, то показуємо просто сторінка 404(не знайдена)
-            }
-            if(env.IsProduction())//якщо будемо в режимі продакшена
-            {
-                app.Run(async context =>
-                {
-                    await context.Response.WriteAsync("Production\t");//Виведеться це повядомлення
-                });
-            }
+            app.UseDeveloperExceptionPage();//Показувати помилкі на сторінках браузеру
+            app.UseStatusCodePages();//Показувати коди сторінок(404,200,...)
+            app.UseStaticFiles();//Дає можливість відображати різного роду CSS файли, зображення....
+            //app.UseMvcWithDefaultRoute();// Дає можливість контроля УРЛ адресів то будуть використовуватись УРЛ за замовчуванням(файл буде в контроллері Home(index.HTML))
 
-
-
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
         }
+
+        
     }
 }
