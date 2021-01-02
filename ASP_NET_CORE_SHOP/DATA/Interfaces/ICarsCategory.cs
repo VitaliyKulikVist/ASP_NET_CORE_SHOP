@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ASP_NET_CORE_SHOP.DATA.Interfaces
 {//Даний інтерфейс для отримання всіх моделей категорій 
-    interface ICarsCategory
+    public interface ICarsCategory//Права доступу на паблік щоб можна було використовувати в контроллері
     {
         //Пропишемо функції які будуть відбуватись в інтерфуесі
         IEnumerable<Category> AllCategories { get; }//Дана функція необхідна для відображення всіх категорій(отримати)

@@ -1,3 +1,5 @@
+using ASP_NET_CORE_SHOP.DATA.Interfaces;//Щоб обєднувати інтерфейси через services.AddTransient не забути прописати
+using ASP_NET_CORE_SHOP.DATA.Moks;//Також не забути прописати для зєднання з класом який буде наслібуватись від інтерфейсу      services.AddTransient<IOllCars,MockCars>   and  services.AddTransient<ICarsCategory, MockCategory>
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +18,15 @@ namespace ASP_NET_CORE_SHOP
         // Для получения дополнительной информации о том, как настроить ваше приложение, посетите https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)//Функція для реєстрації модулей, плагінів в середині проекту
         {
+
+
+            services.AddTransient<IOllCars,MockCars>();//Дозволяє обєднувати між собою інтерфейс IOllCars і клас який реалізовує цей інтрефейс MockCars
+            services.AddTransient<ICarsCategory, MockCategory>();//Дозволяє обєднувати між собою інтерфейс ICarsCategory і клас який реалізовує цей інтрефейс MockCategory
+             
+
             services.AddMvc();//Добавили підтримку скачаного раніше плагіну Mvc     (для роботи з контролерами, моделями)
+
+
         }
 
         // Этот метод вызывается средой выполнения. Используйте этот метод для настройки конвейера HTTP-запросов.
