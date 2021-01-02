@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:49937",
-      "sslPort": 44358
+      "applicationUrl": "http://localhost:49937", //Сторінка яка відкриватиметься в браузері в першу чергу при дебазі в режимі iisExpress
+      "sslPort": 44358 //Порт локального сервера
     }
   },
   "profiles": {
@@ -21,7 +21,7 @@
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000", //відкриється сторінка в браузері по силці .https://localhost:5001 аюл .https://localhost:5000
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

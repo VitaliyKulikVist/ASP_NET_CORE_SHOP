@@ -13,7 +13,7 @@ namespace ASP_NET_CORE_SHOP
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();//Початок роботи
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
