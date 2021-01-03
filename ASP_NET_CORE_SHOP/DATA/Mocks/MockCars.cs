@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASP_NET_CORE_SHOP.DATA.Moks
 {
-    public class MockCars : IOllCars
+    public class MockCars : IAllCars
     {
         private readonly ICarsCategory _carsCategory = new MockCategory();//Створення приватної змінної з категоріями, які можна буде використати при описі кожного нового товару (авто)
 

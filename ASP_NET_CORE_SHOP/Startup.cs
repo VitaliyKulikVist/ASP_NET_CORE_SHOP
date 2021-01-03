@@ -19,8 +19,7 @@ namespace ASP_NET_CORE_SHOP
         public void ConfigureServices(IServiceCollection services)//Функція для реєстрації модулей, плагінів в середині проекту
         {
 
-
-            services.AddTransient<IOllCars,MockCars>();//Дозволяє обєднувати між собою інтерфейс IOllCars і клас який реалізовує цей інтрефейс MockCars
+            services.AddTransient<IAllCars,MockCars>();//Дозволяє обєднувати між собою інтерфейс IOllCars і клас який реалізовує цей інтрефейс MockCars
             services.AddTransient<ICarsCategory, MockCategory>();//Дозволяє обєднувати між собою інтерфейс ICarsCategory і клас який реалізовує цей інтрефейс MockCategory
              
 

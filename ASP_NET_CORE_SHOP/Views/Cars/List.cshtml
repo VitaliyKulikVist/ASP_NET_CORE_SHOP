@@ -14,17 +14,18 @@
     <title>Name_List</title>
 </head>
 <body>
-    <h2>Вивід всіх авто</h2>
+    <h1>Вивід всіх авто</h1>
     @{ //без знака пробіла
         foreach (var car in Model)//Перебираємо циклом, змінну типу вар в якій отримаємо все з ліста Car і доти докии глобальна Model (Яка знаходиться в CarsController.cs)
         {
         <div>
             <h1>Model: @car.name</h1><!--Пишемо що Великими буквами написати модель і вивести імя з ліста який ми раніше прописали--->
-            <h3>Image: @car.img</h3><!--Нижче вивести зображення--->
-            <p>Price: @car.price.ToString("c")</p><!--З абзацу вивести ціну яку ми переконвертували в стрінг з форматом "С"(грощовий формат)--->
-            <h3>Avalible: @car.avalible</h3><!----->
-            <h3>Opis: @car.shortDesc</h3><!----->
-            <h3>Long opis: @car.longDesc</h3><!----->
+
+            <h3>Image: @car.img</h3>
+            <p>Price: @car.price.ToString("c")</p> <!--З абзацу вивести ціну яку ми переконвертували в стрінг з форматом "С"(грощовий формат) -->
+            <h3>Avalible: @car.avalible</h3>
+            <h3>Opis: @car.shortDesc</h3>
+            <h3>Long opis: @car.longDesc</h3>
 
         </div>
         }
