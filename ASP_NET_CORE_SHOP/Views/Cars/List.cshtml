@@ -1,35 +1,30 @@
-﻿@using ASP_NET_CORE_SHOP.DATA.Models <!--Не забути підключити саму модель щоб можна було нею користуватись--->
-@model IEnumerable<Car> 
+﻿@using ASP_NET_CORE_SHOP.DATA.Models
+@model IEnumerable<Car>
 
-
-@{//ось тak описується С# код                       всі цикли, якісь функції які будуть необхідні для HTML сторінки, прописуємо тут
-    Layout = null;//головного шаблону в нас НЕМАЄ
+@{
+    Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Name_List</title>
 </head>
 <body>
-    <h1>Вивід всіх авто</h1>
-    @{ //без знака пробіла
-        foreach (var car in Model)//Перебираємо циклом, змінну типу вар в якій отримаємо все з ліста Car і доти докии глобальна Model (Яка знаходиться в CarsController.cs)
+    <h1>Cars</h1>
+    @{
+        foreach (var car in Model)
         {
-        <div>
-            <h1>Model: @car.name</h1><!--Пишемо що Великими буквами написати модель і вивести імя з ліста який ми раніше прописали--->
-
-            <h3>Image: @car.img</h3>
-            <p>Price: @car.price.ToString("c")</p> <!--З абзацу вивести ціну яку ми переконвертували в стрінг з форматом "С"(грощовий формат) -->
-            <h3>Avalible: @car.avalible</h3>
-            <h3>Opis: @car.shortDesc</h3>
-            <h3>Long opis: @car.longDesc</h3>
-
-        </div>
+            <div>
+                <h1>Model: @car.Name</h1>
+                <h3>Image: @car.Image</h3>
+                <p>Price: @car.Price.ToString("c")</p>
+                <h3>Avalible: @car.Available</h3>
+                <h3>Opis: @car.ShortDescription</h3>
+                <h3>Long opis: @car.LongDescription</h3>
+            </div>
         }
     }
-
 </body>
 </html>

@@ -3,66 +3,84 @@ using ASP_NET_CORE_SHOP.DATA.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ASP_NET_CORE_SHOP.DATA.Moks
 {
-    public class MockCars : IAllCars
-    {
-        private readonly ICarsCategory _carsCategory = new MockCategory();//Створення приватної змінної з категоріями, які можна буде використати при описі кожного нового товару (авто)
-
-
-
-
-        public IEnumerable<Car> Cars 
-        {
-            get
-            {
-                return new List<Car>
-                {
-                    new Car
-                    {
-                        name = "Tesla Модел S",
-                        shortDesc = "Білий автомобіль Tesla",
-                        longDesc = "Швидкий з середнім запасом ходу",
-                        img = "https://atlanticexpress.com.ua/wp-content/uploads/2020/08/tesla_model_s_p100d.jpg",
-                        price = 45000,
-                        isFavorite = true,
-                        avalible = 20,
-                        Category=_carsCategory.AllCategories.First() //говоримо що Category=_carsCategory.AllCategories.First() категорія буде братись з всіх категорії як перша
-                    },
-                    new Car
-                    {
-                        name = "Cybertruck",
-                        shortDesc = "Футуристично виглядаючий автомобіль",
-                        longDesc = "Геометрично правильний автомобіль для дивування прохожих",
-                        img = "https://m.dw.com/image/51362527_101.jpg",
-                        price = 50000,
-                        isFavorite = true,
-                        avalible = 30,
-                        Category=_carsCategory.AllCategories.First() //дане авто відноситься до останьої кактегорій
-                    },
-                    new Car
-                    {
-                        name = "BMW X7",
-                        shortDesc = "Громіздкий автомобіль на дизельному палеві",
-                        longDesc = "Великий 4х4 кросовер для їзди по бездоріжжю з вмістимим багажником",
-                        img = "https://www.bmw.ua/content/dam/bmw/common/all-models/x-series/x7/2018/Inspire/bmw-x7-inspire-radiating-presence-01.jpg",
-                        price = 10000,
-                        isFavorite = true,
-                        avalible = 30,
-                        Category=_carsCategory.AllCategories.Last() //дане авто відноситься до останьої кактегорій
-                    }
-                };
-
+	public class MockCars : IAllCars
+	{
+		private readonly ICarsCategory _carsCategory;
+		private static List<Car> _cars = new List<Car>
+		{
+			new Car
+			{
+				Name = "Tesla Модел S",
+				ShortDescription = "Білий автомобіль Tesla",
+				LongDescription = "Швидкий з середнім запасом ходу",
+				Image = "https://atlanticexpress.com.ua/wp-content/uploads/2020/08/tesla_model_s_p100d.jpg",
+				Price = 45000,
+				IsFavourite = true,
+				Available = 20
+			},
+			new Car
+			{
+				Name = "Cybertruck",
+				ShortDescription = "Футуристично виглядаючий автомобіль",
+				LongDescription = "Геометрично правильний автомобіль для дивування прохожих",
+				Image = "https://m.dw.com/image/51362527_101.jpg",
+				Price = 50000,
+				IsFavourite = true,
+				Available = 30
+            },
+			new Car
+			{
+				Name = "BMW X7",
+				ShortDescription = "Громіздкий автомобіль на дизельному палеві",
+				LongDescription = "Великий 4х4 кросовер для їзди по бездоріжжю з вмістимим багажником",
+				Image = "https://www.bmw.ua/content/dam/bmw/common/all-models/x-series/x7/2018/Inspire/bmw-x7-inspire-radiating-presence-01.jpg",
+				Price = 10000,
+				IsFavourite = true,
+				Available = 30
             }
-        }
-        public IEnumerable<Car> getFavorCars 
-        { get ;set ; }
+		};
 
-        public Car getObjectCar(int carId)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public MockCars(ICarsCategory carsCategory)
+		{
+			_carsCategory = carsCategory
+				?? throw new ArgumentNullException(nameof(carsCategory));
+		}
+
+		public IEnumerable<Car> GetAllCars()
+		{
+			var category = _carsCategory.GetAllCategories().FirstOrDefault();
+
+			return _cars.Select(c =>
+			{
+				c.Category = category;
+
+				return c;
+			}).ToList();
+		}
+
+		public IEnumerable<Car> GetVafouriteCars()
+		{
+			var category = _carsCategory.GetAllCategories().FirstOrDefault();
+
+			return _cars.Where(c => c.IsFavourite)
+				.Select(c =>
+				{
+					c.Category = category;
+
+					return c;
+				}).ToList();
+		}
+
+		public Car GetCarById(int carId)
+		{
+			var result =  _cars.FirstOrDefault(c => c.Id == carId);
+
+			result.Category = _carsCategory.GetAllCategories().FirstOrDefault();
+
+			return result;
+		}
+	}
 }
