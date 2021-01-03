@@ -26,6 +26,6 @@ namespace ASP_NET_CORE_SHOP.DATA.Moks
             {
 
             }
-        }
+    }
     }
 }

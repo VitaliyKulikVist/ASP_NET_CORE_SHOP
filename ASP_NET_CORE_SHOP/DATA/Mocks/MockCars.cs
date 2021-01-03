@@ -10,11 +10,10 @@ namespace ASP_NET_CORE_SHOP.DATA.Moks
     public class MockCars : IAllCars
     {
         private readonly ICarsCategory _carsCategory = new MockCategory();//Створення приватної змінної з категоріями, які можна буде використати при описі кожного нового товару (авто)
+        public IEnumerable<Car> Cars
 
-
-
-
-        public IEnumerable<Car> Cars 
+            // private readonly ICarsCategory _carsCategory;
+            //private static List<Car> _cars = new List<Car>//list masive
         {
             get
             {
@@ -29,7 +28,7 @@ namespace ASP_NET_CORE_SHOP.DATA.Moks
                         price = 45000,
                         isFavorite = true,
                         avalible = 20,
-                        Category=_carsCategory.AllCategories.First() //говоримо що Category=_carsCategory.AllCategories.First() категорія буде братись з всіх категорії як перша
+                        //Category=_carsCategory.AllCategories.First() //говоримо що Category=_carsCategory.AllCategories.First() категорія буде братись з всіх категорії як перша
                     },
                     new Car
                     {
@@ -40,7 +39,7 @@ namespace ASP_NET_CORE_SHOP.DATA.Moks
                         price = 50000,
                         isFavorite = true,
                         avalible = 30,
-                        Category=_carsCategory.AllCategories.First() //дане авто відноситься до останьої кактегорій
+                        //Category=_carsCategory.AllCategories.First() //дане авто відноситься до останьої кактегорій
                     },
                     new Car
                     {
@@ -51,12 +50,14 @@ namespace ASP_NET_CORE_SHOP.DATA.Moks
                         price = 10000,
                         isFavorite = true,
                         avalible = 30,
-                        Category=_carsCategory.AllCategories.Last() //дане авто відноситься до останьої кактегорій
+                        //Category=_carsCategory.AllCategories.Last() //дане авто відноситься до останьої кактегорій
                     }
                 };
-
             }
         }
+
+
+
         public IEnumerable<Car> getFavorCars 
         { get ;set ; }
 

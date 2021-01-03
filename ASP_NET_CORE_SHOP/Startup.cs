@@ -24,7 +24,10 @@ namespace ASP_NET_CORE_SHOP
              
 
             services.AddMvc();//Добавили підтримку скачаного раніше плагіну Mvc     (для роботи з контролерами, моделями)
-
+            
+            
+            
+            services.AddControllersWithViews();
 
         }
 
@@ -34,8 +37,10 @@ namespace ASP_NET_CORE_SHOP
             app.UseDeveloperExceptionPage();//Показувати помилкі на сторінках браузеру
             app.UseStatusCodePages();//Показувати коди сторінок(404,200,...)
             app.UseStaticFiles();//Дає можливість відображати різного роду CSS файли, зображення....
-            //app.UseMvcWithDefaultRoute();// Дає можливість контроля УРЛ адресів то будуть використовуватись УРЛ за замовчуванням(файл буде в контроллері Home(index.HTML))
-
+                                 //app.UseMvcWithDefaultRoute();// Дає можливість контроля УРЛ адресів то будуть використовуватись УРЛ за замовчуванням(файл буде в контроллері Home(index.HTML))
+            app.UseRouting();
+            app.UseEndpoints(o =>
+                o.MapControllerRoute("default", "{controller=Cars}/{action=List}/{id?}"));
         }
 
         
