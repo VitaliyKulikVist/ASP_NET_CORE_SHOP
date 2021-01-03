@@ -1,4 +1,5 @@
 ﻿using ASP_NET_CORE_SHOP.DATA.Interfaces;//Підключаємо інтерфейс
+using ASP_NET_CORE_SHOP.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,9 +27,14 @@ namespace ASP_NET_CORE_SHOP.Controllers
         //По цим функціям потім можна зсилатись і відповідно HTML сторінка повинна мати назву цієї функції
         public ViewResult List()//Повертатиме результат а саме список всіх товарів             коли ми будемо обращатьсь до даної функції ми будемо отримувати HTML сторінку з всіми авто
         {
-            ViewBag.Cars = "Щось нове";
-            var cars = _allCars.Cars;//Змінній присвоюємо всі автомобілі з інтерфейсу IOllCars          Зсилаємось до конкретного інтерфейсу і через змінну цього інтерфейсу, зсилаємось до функції Cars
-            return View(cars); //цю ж змінну предаємо на HTML сторінку
+
+            CarsListVievModel carsListVievModel = new CarsListVievModel();
+            carsListVievModel.allCars = _allCars.Cars;
+            carsListVievModel.carrCategory = "Cars";
+
+            //ViewBag.Somsyn_intrestin = "Перевірка відобреження ViewBag ";//передача чого небудь в відображення на HTML сторінці
+            //var cars = _allCars.Cars;//Змінній присвоюємо всі автомобілі з інтерфейсу IOllCars          Зсилаємось до конкретного інтерфейсу і через змінну цього інтерфейсу, зсилаємось до функції Cars
+            return View(carsListVievModel); //цю ж змінну предаємо на HTML сторінку
         }
 
     }
