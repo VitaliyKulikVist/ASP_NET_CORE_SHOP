@@ -27,7 +27,7 @@ namespace ASP_NET_CORE_SHOP.Controllers
         //По цим функціям потім можна зсилатись і відповідно HTML сторінка повинна мати назву цієї функції
         public ViewResult List()//Повертатиме результат а саме список всіх товарів             коли ми будемо обращатьсь до даної функції ми будемо отримувати HTML сторінку з всіми авто
         {
-
+            ViewBag.Tirle = "Сторінка з автомобілями";//Прописали функцію яка передає тайтл на HTML сторінку,   велику кількість даних через ViewBag не пепредавати
             CarsListVievModel carsListVievModel = new CarsListVievModel();
             carsListVievModel.allCars = _allCars.Cars;
             carsListVievModel.carrCategory = "Cars";
