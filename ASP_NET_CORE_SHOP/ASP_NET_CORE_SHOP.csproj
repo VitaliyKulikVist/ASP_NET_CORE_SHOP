@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <Folder Include="Views\Category\" />
+    <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>
