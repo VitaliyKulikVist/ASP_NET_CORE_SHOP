@@ -1,0 +1,13 @@
+﻿<!--model ASP_NET_CORE_SHOP.DATA.Models.Car                             оскільки всі можелі підключені в файлі _ViewImports.cshtml то тут можемо прописати лише: -->
+@model Car
+
+<div class="col-lg-4">
+    <!-- Створення з кожною новою ітерацією нового блоку по 4 одиниці (сітка з 12 беремо 4) -->
+    <img class="img-thumbnail" src="@Model.img" alt="@Model.name" /><!-- Картинки будуть по горизонталі і так само використовуємо заготовку класу Бутстрапа-->
+    <h1>Model: @Model.name</h1><!--Пишемо що Великими буквами написати модель і вивести імя з ліста який ми раніше прописали--->
+    <p>Price: @Model.price.ToString("c")</p> <!--З абзацу вивести ціну яку ми переконвертували в стрінг з форматом "С"(грощовий формат) -->
+    <h3>Avalible: @Model.avalible</h3>
+    <h3>Opis: @Model.shortDesc</h3>
+    <h3>Long opis: @Model.longDesc</h3>
+    <p><a class="btn btn-warning" href="#">Info</a></p>     <!--Add button Info-->
+</div>
