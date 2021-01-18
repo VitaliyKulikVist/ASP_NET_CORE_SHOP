@@ -1,9 +1,11 @@
 using ASP_NET_CORE_SHOP.DATA;
 using ASP_NET_CORE_SHOP.DATA.Interfaces;//Щоб обєднувати інтерфейси через services.AddTransient не забути прописати
+using ASP_NET_CORE_SHOP.DATA.Models;
 using ASP_NET_CORE_SHOP.DATA.Moks;//Також не забути прописати для зєднання з класом який буде наслібуватись від інтерфейсу      services.AddTransient<IOllCars,MockCars>   and  services.AddTransient<ICarsCategory, MockCategory>
 using ASP_NET_CORE_SHOP.DATA.Repository;
 using Microsoft.AspNetCore.Builder;//!
 using Microsoft.AspNetCore.Hosting;//!
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;//IConfigurationRoot       //!
 using Microsoft.Extensions.DependencyInjection;//!
@@ -33,11 +35,17 @@ namespace ASP_NET_CORE_SHOP
             //Прописання який інтерфейс реалізовується в якому класі БД         інтерфейси реалізуються в класах CarRepository і CategoryRepository а ці репозиторії в свою чергу слугують дял роботи з БД
             services.AddTransient<IAllCars, CarRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
-
-            services.AddMvc();//Добавили підтримку скачаного раніше плагіну Mvc     (для роботи з контролерами, моделями)
-            
             services.AddControllersWithViews();
 
+            //Для роботи з Корзиною
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShopCart.GetCart(sp));//для двох різних користувачів буде 2 різні корзини
+
+            services.AddMvc();//Добавили підтримку скачаного раніше плагіну Mvc     (для роботи з контролерами, моделями)
+
+            //після додавання сесій і підключення NuGet
+            services.AddMemoryCache();//Використовуємо кеш
+            services.AddSession();//Використовуємо сесії
         }
 
         // Этот метод вызывается средой выполнения. Используйте этот метод для настройки конвейера HTTP-запросов.
@@ -47,9 +55,13 @@ namespace ASP_NET_CORE_SHOP
             app.UseStatusCodePages();//Показувати коди сторінок(404,200,...)
             app.UseStaticFiles();//Дає можливість відображати різного роду CSS файли, зображення....
                                  //app.UseMvcWithDefaultRoute();// Дає можливість контроля УРЛ адресів то будуть використовуватись УРЛ за замовчуванням(файл буде в контроллері Home(index.HTML))
+            app.UseSession();//Використовуємо сесії
+
+
+
+
             app.UseRouting();
-            app.UseEndpoints(o =>
-                o.MapControllerRoute("default", "{controller=Cars}/{action=List}/{id?}"));
+            app.UseEndpoints(o =>o.MapControllerRoute("default", "{controller=Cars}/{action=List}/{id?}"));
 
             //Створюємо первне середовище
             using (var scoupe = app.ApplicationServices.CreateScope())
